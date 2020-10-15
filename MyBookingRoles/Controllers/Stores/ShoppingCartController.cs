@@ -113,7 +113,7 @@ namespace MyBookingRoles.Controllers.Store
                 CustomerEmail = frc["custEmail"],
                 CustomerAddress = frc["custAddress"],
                 OrderDate = DateTime.Now,
-                PaymentType = "Cash", //Change Later
+                PaymentType = "PayPal",
                 Status = "Processing",
                 OrderName = frc["custName"] + "-" + DateTime.Now + "-" + System.Convert.ToDouble(frc["TotalAmount"]),
             };

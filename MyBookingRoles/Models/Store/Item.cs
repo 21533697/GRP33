@@ -46,12 +46,5 @@ namespace MyBookingRoles.Models.Store
 
         public decimal Price { get; set; }
         public virtual Order Order { get; set; }
-
-        //
-        //public decimal calcSub()
-        //{
-        //    Price = pr.Price * (Convert.ToDecimal(quantity));
-        //    return Price;
-        //}
     }
 }

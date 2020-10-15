@@ -23,31 +23,29 @@ namespace MyBookingRoles.Controllers.Stores
         }
 
         [Authorize(Roles = "SuperAdmin")]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult ApproveOrder(int id)
         {
-            //if (id == null)
-            //{
-            //    return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
-            //}
-            //var orderD = db.OrderDetails.Where(o => o.OrderId == id);
-            var ord = db.Orders.Find(id).Status;
-            //if (ord == null)
-            //{
-            //    return HttpNotFound();
-            //}
 
-            //ord = "Approved";
-            //db.Entry(ord).State = EntityState.Modified;
-            //db.SaveChanges();
-            return RedirectToAction("Index");
+            //var orderD = db.OrderDetails.Where(o => o.OrderId == id);
+
+            Order ord = db.Orders.Find(id);
+            ord.Status = "Approved";
+            db.Entry(ord).State = EntityState.Modified;
+            db.SaveChangesAsync();
+
+            return RedirectToAction("Index", new { id = ord.OrderId });
         }
 
+        [Authorize(Roles = "SuperAdmin")]
         public ActionResult DeleteOrder(int id)
         {
-            //write logic for deleting an order with its order details
-            return View("Index", "Orders");
+            Order ord = db.Orders.Find(id);
+            //ord.Status = "Cancelled";
+            //db.Entry(ord).State = EntityState.Modified;
+            db.Orders.Remove(ord);
+            db.SaveChangesAsync();
+
+            return RedirectToAction("Index");
         }
 
         // GET: Orders/Details/5
