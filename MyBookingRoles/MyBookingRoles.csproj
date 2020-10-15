@@ -196,6 +196,7 @@
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\Stores\BrandsController.cs" />
     <Compile Include="Controllers\Stores\CategoriesController.cs" />
+    <Compile Include="Controllers\Stores\InventoryController.cs" />
     <Compile Include="Controllers\Stores\OrdersController.cs" />
     <Compile Include="Controllers\Stores\ProductsController.cs" />
     <Compile Include="Controllers\Stores\ShoppingCartController.cs" />
@@ -384,6 +385,7 @@
   <ItemGroup>
     <Folder Include="images\Site_Imaes\" />
     <Folder Include="Views\DeliverySystem\" />
+    <Folder Include="Views\Inventory\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202009022021118_BrandVisibility.resx">
