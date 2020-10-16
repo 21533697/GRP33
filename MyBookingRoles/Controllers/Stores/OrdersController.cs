@@ -25,9 +25,6 @@ namespace MyBookingRoles.Controllers.Stores
         [Authorize(Roles = "SuperAdmin")]
         public ActionResult ApproveOrder(int id)
         {
-
-            //var orderD = db.OrderDetails.Where(o => o.OrderId == id);
-
             Order ord = db.Orders.Find(id);
             ord.Status = "Approved";
             db.Entry(ord).State = EntityState.Modified;
@@ -40,8 +37,6 @@ namespace MyBookingRoles.Controllers.Stores
         public ActionResult DeleteOrder(int id)
         {
             Order ord = db.Orders.Find(id);
-            //ord.Status = "Cancelled";
-            //db.Entry(ord).State = EntityState.Modified;
             db.Orders.Remove(ord);
             db.SaveChangesAsync();
 

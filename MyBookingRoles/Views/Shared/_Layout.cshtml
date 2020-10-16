@@ -32,7 +32,8 @@
                 }
             </div>
             <div class="navbar-collapse collapse">
-                @if (User.IsInRole("Customer"))
+                
+                @if (!User.IsInRole("SuperAdmin") && !User.IsInRole("Delivery"))
                 {
                     <ul class="nav navbar-nav">
                         <li>@Html.ActionLink("About", "About", "Home")</li>

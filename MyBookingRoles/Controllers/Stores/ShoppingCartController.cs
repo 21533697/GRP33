@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -64,10 +65,17 @@ namespace MyBookingRoles.Controllers.Store
         //GET: Update
         public ActionResult Update(FormCollection fc)
         {
+            ViewBag.QError = "";
+
             string[] quantity = fc.GetValues("quantity");
             List<Item> cart = (List<Item>)Session["cart"];
+            
+            
             for (int i = 0; i < cart.Count; i++)
+            {
                 cart[i].Quantity = Convert.ToInt32(quantity[i]);
+                
+            }
             Session["cart"] = cart;
             return RedirectToAction("Cart");
         }
@@ -98,6 +106,7 @@ namespace MyBookingRoles.Controllers.Store
         //[HttpPost]
         //Authorize to add the orders form Correctly
         [Authorize(Roles = "Customer")]
+        [HttpPost]
         public ActionResult ProcessOrder(FormCollection frc)
         {
 
@@ -115,7 +124,7 @@ namespace MyBookingRoles.Controllers.Store
                 OrderDate = DateTime.Now,
                 PaymentType = "PayPal",
                 Status = "Processing",
-                OrderName = frc["custName"] + "-" + DateTime.Now + "-" + System.Convert.ToDouble(frc["TotalAmount"]),
+                OrderName = frc["custName"] + "-" + DateTime.Now + "-" + System.Convert.ToDouble(frc["TotalAmount"])
             };
             order.SendMail();
             context.Orders.Add(order);
@@ -130,13 +139,19 @@ namespace MyBookingRoles.Controllers.Store
                     ProdId = cart1.Pr.ProductID,
                     Quantity = cart1.Quantity,
                     Price = cart1.Pr.Price,
-                    
                  };
 
                 context.OrderDetails.Add(item1);
-                context.SaveChanges();
+
 
                 //Write Statement to Update product quantity on purchase
+                Product prd = context.Products.Find(cart1.Pr.ProductID);
+                prd.InStoreQuantity -= cart1.Quantity;
+                context.Entry(prd).State = EntityState.Modified;
+
+                
+                context.SaveChanges();
+
             }
 
             Session.Remove("cart");

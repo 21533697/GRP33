@@ -10,13 +10,12 @@
 
 <center>
     <div class="row">
-        <h2><u>Delivery Information.</u></h2>
+        <h2><u>Delivery Management.</u></h2>
         <p class="col-md-6">
-            @Html.ActionLink("Manage All Delivery Users", "Index", "DeliverySystem", null, new { @class = "btn btn-danger" })<br /><br />
-            @Html.ActionLink("Register New Delivery User", "Register", "SuperAdmin", null, new { @class = "btn btn-danger" })
+            @Html.ActionLink("Manage All Delivery Users", "#", "DeliverySystem", null, new { @class = "btn btn-danger" })<br /><br />
         </p>
         <p class="col-md-6">
-
+            @Html.ActionLink("Register New Delivery User", "#", "SuperAdmin", null, new { @class = "btn btn-danger" })
         </p>
     </div>
     <hr />
@@ -26,6 +25,7 @@
             <ul>
                 <li>All Delivery Personal</li>
                 <li>Orders And Delivery Personal</li>
+                <li>Delivery Orders List + Status</li>
                 <li></li>
             </ul>
         </p>

@@ -9,7 +9,7 @@ namespace MyBookingRoles.Controllers.Stores
     public class InventoryController : Controller
     {
         // GET: Inventory
-        public ActionResult Index()
+        public ActionResult ListIndex()
         {
             return View();
         }

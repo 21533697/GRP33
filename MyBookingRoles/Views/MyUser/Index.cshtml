@@ -1,6 +1,6 @@
 ﻿@using Microsoft.AspNet.Identity
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "User Dashboard";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
@@ -18,32 +18,39 @@
 
 <div class="row">
     <div class="container">
-        <h1><u><b>Your General Options</b></u></h1>
-        <br />
+        <h1 style="text-align:center;"><u><b>Your General Options</b></u></h1>
+        <hr />
         <br />
         <div class="col-md-3">
-            @Html.ActionLink("My Orders", "customerOrders", "MyUser", null, new { @class = "btn btn-default" }) <br /><hr />
-            @*@Html.ActionLink("My Address Book", "#", "#", null, new { @class = "btn btn-danger" }) <br /><br />
-            @Html.ActionLink("My Payment Methods", "#", "#", null, new { @class = "btn btn-danger" }) <br /><br />
-            @Html.ActionLink("Customer Help", "#", "#", null, new { @class = "btn btn-danger" })*@
+            @Html.ActionLink("All My Orders", "customerOrders", "MyUser", null, new { @class = "btn btn-default" }) <br /><br />
+            @Html.ActionLink("Customer Help!", "#", "#", null, new { @class = "btn btn-danger" }) <br /><br />
+            
+            <hr />
         </div>
 
-        @*<div class="col-md-7" style="border-left: 1px solid black;">
-            <h1><u>To - Do List!</u></h1>
-            <ul>
-                <li>Delete account Doesnt Work.</li>
-                <li>Add User Profile Information.</li>
-                <li>.................................</li>
-                <li>Add User Orders.</li>
-                <li>Add Order Delivery Status Changes From Cancellation</li>
-                <li>Add Order Cancellation</li>
-            </ul>
+        <div style="background-color: white; padding: 15px; text-align:center;" class="col-md-9">
+            <div class="container">
+
+                <p style="padding: 5px 5px; border: 1px dashed gray;" class="col-md-4">
+                    @Html.ActionLink("Rate Our Delivery", "#", "Home", null, new { @class = "btn btn-danger" })
+                    <br />
+                    <br />
+                    Rate Your Delivery!
+                </p>
+
+                <p style="padding: 5px 5px; border: 1px dashed gray;" class="col-md-4">
+                    @Html.ActionLink("Manage Subscription", "#", "#", null, new { @class = "btn btn-danger" })
+                    <br />
+                    <br />
+                    Your Subscription Deals Here!
+                </p>
+            </div>
             <hr />
-            <h1><u>>Important List!</u></h1>
-            <ul>
-                <li>Fix User - Artist Service Ratings.</li>
-                <li>Subscription Options..</li>
-            </ul>
-        </div>*@
+            <p>
+                <h2>
+                    Delete account Doesnt Work.
+                </h2>
+            </p>
+        </div>
     </div>
 </div>
