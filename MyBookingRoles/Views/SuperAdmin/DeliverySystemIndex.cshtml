@@ -4,23 +4,25 @@
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
-<h2><u>Shipping Index</u></h2>
+<div class="jumbotron" style="text-align: center;">
+    <h1><b><u>Shipping Index</u></b></h1>
+</div>
 
 <center>
     <div class="row">
         <h2><u>Delivery Information.</u></h2>
-        <p>
-            <ul>
-                <li>All Orders</li>
-                <li>All Delivered Orders</li>
-                <li></li>
-            </ul>
+        <p class="col-md-6">
+            @Html.ActionLink("Manage All Delivery Users", "Index", "DeliverySystem", null, new { @class = "btn btn-danger" })<br /><br />
+            @Html.ActionLink("Register New Delivery User", "Register", "SuperAdmin", null, new { @class = "btn btn-danger" })
+        </p>
+        <p class="col-md-6">
+
         </p>
     </div>
     <hr />
     <div class="row">
         <h2><u>Delivery Personal Information.</u></h2>
-        <p>
+        <p class="col-md-12">
             <ul>
                 <li>All Delivery Personal</li>
                 <li>Orders And Delivery Personal</li>
