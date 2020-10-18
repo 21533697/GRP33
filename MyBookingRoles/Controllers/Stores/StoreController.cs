@@ -23,6 +23,7 @@ namespace Studio45.Controllers.Store
             return View(db.Products.Where(p => p.ProductName.Contains(searchWord) || searchWord == null && p.IsVisible == true).ToList());
         }
 
+        // GET: ProductDetails
         public ActionResult ProductDetails(int? id)
         {
             if (id == null)
@@ -37,21 +38,13 @@ namespace Studio45.Controllers.Store
             return View(product);
         }
 
-        //
-        //GET:/StoreHome/Browse
-        public ActionResult Search()
-        {
-            //Search Code....
-            //
-
-            return View("ProdCatalogue");
-        }
-
+        // GET: BrandCatalogue
         public ActionResult BrandCatalogue(string searchWord)
         {
             return View(db.Brands.Where(p => p.Name.Contains(searchWord) || searchWord == null).ToList());
         }
 
+        // GET: CategoryCatalogue
         public ActionResult CategoryCatalogue(string searchWordC)
         {
             return View(db.Category.Where(p => p.CategoryName.Contains(searchWordC) || searchWordC == null).ToList());

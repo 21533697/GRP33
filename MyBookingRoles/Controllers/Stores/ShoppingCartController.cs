@@ -65,8 +65,6 @@ namespace MyBookingRoles.Controllers.Store
         //GET: Update
         public ActionResult Update(FormCollection fc)
         {
-            ViewBag.QError = "";
-
             string[] quantity = fc.GetValues("quantity");
             List<Item> cart = (List<Item>)Session["cart"];
             
