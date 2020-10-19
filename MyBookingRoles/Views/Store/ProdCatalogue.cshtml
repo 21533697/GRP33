@@ -1,83 +1,218 @@
-﻿@model IEnumerable<MyBookingRoles.Models.Store.Product>
-@using MyBookingRoles.Models.Store
+﻿@model PagedList.IPagedList<MyBookingRoles.Models.Store.Product>
+@using MyBookingRoles.Models.Store;
+@using PagedList.Mvc;
+
 @{
     ViewBag.Title = "Product Catalogue";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@using (Html.BeginForm("ProdCatalogue", "Store", FormMethod.Get))
-{
-    <div class="row" style="background-color: black; padding: 5px">
-        <div class="col-md-2">
-            <h4>Product Catalogue </h4>
-        </div>
-        <div class="col-md-2">
-            @Html.TextBox("searchWord", null, null, new { @class = "form-control" })
-        </div>
-        <div class="col-md-2">
-            <input type="submit" value="Search Product" class="btn btn-success" />
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<!-- Google font -->
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+<!-- Bootstrap -->
+<link type="text/css" rel="stylesheet" href="~/Content/Store/css/bootstrap.min.css" />
+<!--slick-->
+<link type="text/css" rel="stylesheet" href="~/Content/Store/css/slick.css" />
+<link type="text/css" rel="stylesheet" href="~/Content/Store/css/slick-theme.css" />
+<!--nouislider-->
+<link type="text/css" rel="stylesheet" href="~/Content/Store/css/nouislider.min.css" />
+<!--font awesome-->
+<link type="text/css" rel="stylesheet" href="~/Content/Store/css/font-awesome.min.css" />
+<!--custom style-->
+<link type="text/css" rel="stylesheet" href="~/Content/Store/css/style.css" />
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        // Document.ready -> link up remove event handler
+        $(".AddLink").click(function () {
+            // Get the id from the link
+            var recordToAdd = $(this).attr("data-id");
+            if (recordToAdd != '') {
+                // Perform the ajax post
+                $.post("/ShoppingCart/OrderNow", { "id": recordToAdd },
+                    function (data) {
+                        $('#cart-status').text(data.CartCount);
+                    });
+            }
+        });
+    });
+</script>
+
+<!-- Button trigger modal -->
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+    <div aria-hidden="true" class="alert alert-dismissable alert-success">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong>An item was added to your cart.</strong> To check out now simply <a href="#" class="alert-link">click here</a>.
+    </div>
+
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Confirm check out.</h4>
+            </div>
+            <div class="modal-body">
+                <p>Would you like to check out or keep shopping?</p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Continue</button>
+                <button type="submit" class="btn btn-primary" onclick="location.href='@Url.Action("Cart", "ShoppingCart")'">Check Out</button>
+            </div>
         </div>
     </div>
-}
-<br />
-<div class="jumbotron" style="text-align: center;">
-    Image Here.
 </div>
 
 
-<div class="row" style="padding: 5px">
-    @if (Model.Count() == 0)
-    {
-        <h5>
-            No Products Could Be Found. 
-        </h5>
-    }
-    else
-    {
-        foreach (var item in Model)
-        {
-            var base64 = "";
-            var imgsrc = "";
-
-            <div class="col-md-4" style="border-left: 1px solid black; padding: 5px;">
-                <div class="panel-primary" style="border: 1px solid white; padding: 5px;">
-                    @if (item.ProductPics != null)
-                    {
-                        base64 = Convert.ToBase64String(item.ProductPics);
-                        imgsrc = string.Format("data:image/gif;base64,{0}", base64);
-
-                        <center><img src='@imgsrc' style="width:300px;height:290px" class="img-responsive" /></center>
-                    }
-                </div>
-                <hr />
-                <div class="panel-body" style="border: 1px solid white; padding: 5px; background-color: silver;">
-
-                    <div class="info text-center">
-                        <h3>
-                            <u>@Html.DisplayFor(modelItem => item.ProductName)</u>
-                        </h3>
-                        <p>
-                            Available In-Store : <b><u>@Html.DisplayFor(modelItem => item.InStoreQuantity)</u></b> items.
-                        </p>
-                        <p>
-                            <b>R @Html.DisplayFor(modelItem => item.Price)</b> | 
-                            <b>Discount : R </b>
-                        </p>
-
-                        <p>
-                            <div>
-                                @Html.ActionLink("Order Now", "OrderNow", "ShoppingCart", new { id = item.ProductID }, new { @class = "btn btn-success" }) |
-                                @Html.ActionLink("Details", "ProductDetails", "Store", new { id = item.ProductID }, new { @class = "btn btn-success" })
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div id="aside" class="col-md-3">
+                <!--aside widget-->
+                <div class="aside">
+                    <h3 class="aside-title">Categories</h3>
+                    <div class="checkbox-filter">
+                        
+                        @foreach (var item in Model)
+                        {
+                            <div class="input-checkbox">
+                                <input type="checkbox" id="brand-1">
+                                <label for="brand-1">
+                                    <span></span>
+                                    @item.Category.CategoryName
+                                    <small>@Model.TotalItemCount</small>
+                                </label>
                             </div>
-                        </p>
+                        }
                     </div>
+
                 </div>
             </div>
-        }
-    }
+            <div id="store" class="col-md-9">
+                <div class="row">
+                    @using (Html.BeginForm("ProdCatalogue", "Store", FormMethod.Get))
+                    {
+                        <div class="navbar-fixed-position-sticky" style="background-color: black; padding: 5px">
+                            <div class=" input-group col-md-12 store-sort">
+                                <div class="col-md-2">
+                                    <h4>Product Catalogue </h4>
+                                </div>
+                                <span class="input-group-addon glyphicon glyphicon-search">
+                                    @Html.TextBox("searchWord", null, null, new { @class = "form-control" })
+
+                                    <input type="submit" value="Search Product" class="btn btn-success btn-lg" />
+                                </span>
+
+                            </div>
+                        </div>
+                    }
+
+                </div>
+                <div class="row">
+                    @if (Model.Count() == 0)
+                    {
+                        <h5>
+                            No Products Could Be Found.
+                        </h5>
+                    }
+                    else
+                    {
+                        foreach (var x in Model)
+                        {
+                            var base64 = "";
+                            var imgsrc = "";
+
+
+                            decimal sum = 0;
+
+                            decimal p = x.Price * 20 / 100;
+                            sum = x.Price + p;
+
+
+                            <div class="col-md-4 col-xs-6">
+
+                                <div class="product">
+                                    <div class="product-img">
+                                        @if (x.ProductPics != null)
+                                        {
+
+                                            base64 = Convert.ToBase64String(x.ProductPics);
+                                            imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+
+                                            <img src='@imgsrc' alt="" />
+
+                                        }
+                                        <div class="product-label">
+                                            <span class="sale">-20%</span>
+                                            <span class="new">NEW</span>
+                                        </div>
+                                    </div>
+                                    <div class="product-body">
+                                        <p class="product-category">@x.Category.CategoryName</p>
+                                        <h3 class="product-name"><a href="#">@x.Brand.Name - @x.ProductName</a></h3>
+                                        <h4 class="product-price">R @x.Price <del class="product-old-price">R @sum</del></h4>
+                                        <div class="product-rating">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                        <div class="product-btns">
+                                            <a class="add-to-wishlist" href="@Url.Action("Add", "Wishlist", new { id = x.ProductID })"> <i class=" fa fa-heart-o; tooltip"></i> <span class="tooltip "></span> add to wislist </a>
+                                            <a class="quick-view" href="@Url.Action("ProductDetails", "Store")"> <i class="tooltip fa fa-eye"></i>quick view</a>
+                                        </div>
+                                    </div>
+                                    <div class="add-to-cart">
+
+                                        <a class=" btn add-to-cart-btn" href="@Url.Action("OrderNow", "ShoppingCart", new { id = x.ProductID })"><span class=" fa fa-shopping-cart"></span> Add to cart</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /product -->
+
+                        }
+                    }
+                    <div class=" clearfix visible-lg visible-md"></div>
+
+                </div>
+
+                <div>
+                    @Html.ActionLink("Back to Full List", "ProdCatalogue", null, new { @class = "btn btn-primary" })
+                    |
+                    @Html.ActionLink("Back to  Home Page", "Index", "Home", null, new { @class = "btn btn-default" })
+                </div>
+            </div>
+
+            <br />
+            <div class=" store-filter clearfix">
+                <span class="store-qty"><b>Showing 9 of @ViewBag.ProdCount products</b></span>
+
+                <ul class="store-pagination">
+                    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+                    @Html.PagedListPager(Model, page => Url.Action("Catalogue", new
+                    {
+                 page,
+                 sortOrder = ViewBag.CurrentSort,
+                 currentFilter = ViewBag.CurrentFilter
+                   }))
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
 </div>
-<hr />
-<div>
-    @Html.ActionLink("Back to Full List", "ProdCatalogue", null, new { @class = "btn btn-primary" })
-    |
-    @Html.ActionLink("Back to  Home Page", "Index", "Home", null, new { @class = "btn btn-default" })
-</div>
+
+
+<script src="~/Scripts/StoreJs/js/jquery.min.js"></script>
+<script src="~/Scripts/StoreJs/js/bootstrap.min.js"></script>
+<script src="~/Scripts/StoreJs/js/jquery.zoom.min.js"></script>
+<script src="~/Scripts/StoreJs/js/main.js"></script>
+<script src="~/Scripts/StoreJs/js/nouislider.min.js"></script>
+<script src="~/Scripts/StoreJs/js/slick.min.js"></script>
