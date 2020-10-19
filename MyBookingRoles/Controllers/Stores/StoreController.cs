@@ -27,6 +27,7 @@ namespace Studio45.Controllers.Store
             return View(db.Products.Where(p => p.ProductName.Contains(searchWord) || searchWord == null && p.IsVisible == true).ToPagedList(pageNumber,pageSize));
         }
 
+        // GET: ProductDetails
         public ActionResult ProductDetails(int? id)
         {
             if (id == null)
@@ -41,6 +42,7 @@ namespace Studio45.Controllers.Store
             return View(product);
         }
 
+<<<<<<< HEAD
         //
         //GET:/StoreHome/Browse
         public ActionResult Search()
@@ -52,13 +54,22 @@ namespace Studio45.Controllers.Store
         }
 
         public ActionResult BrandCatalogue(int? page, string searchWord)
+=======
+        // GET: BrandCatalogue
+        public ActionResult BrandCatalogue(string searchWord)
+>>>>>>> cd0a5c4a35709a1601bdb0d32b24463ecf2defdc
         {
             int pageSize=8;
             int pageNumber = (page ?? 1);
             return View(db.Brands.Where(p => p.Name.Contains(searchWord) || searchWord == null).ToPagedList(pageNumber,pageSize));
         }
 
+<<<<<<< HEAD
         public ActionResult CategoryCatalogue(string searchWordC, int? page)
+=======
+        // GET: CategoryCatalogue
+        public ActionResult CategoryCatalogue(string searchWordC)
+>>>>>>> cd0a5c4a35709a1601bdb0d32b24463ecf2defdc
         {
             int pageSize = 8;
             int pageNumber = (page ?? 1);

@@ -305,7 +305,7 @@
         else
         {
             <tr class="row">
-                <td style="color: red;">
+                <td style="background-color: red;">
                     <h3>Check-Out Empty .</h3>
                     <p>
                         @Html.ActionLink("Go Back Shopping!", "ProdCatalogue", "Store")
@@ -346,7 +346,7 @@
                     </tr>
                     <tr>
                         <td>Customer Email</td>
-                        <td>&nbsp; &nbsp; <input type="text" name="custEmail" value="@ViewBag.User" class="form-control" class="form-control" /></td>
+                        <td>&nbsp; &nbsp; <input type="text" name="custEmail" readonly value="@ViewBag.User" class="form-control"/></td>
                     </tr>
                     <tr>
                         <td>Customer Address</td>

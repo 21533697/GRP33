@@ -121,6 +121,11 @@ namespace MyBookingRoles.Controllers
             return View(myArtisys);
         }
 
+        public ActionResult InventoryIndex()
+        {
+
+            return View();
+        }
 
         private void AddErrors(IdentityResult result)
         {

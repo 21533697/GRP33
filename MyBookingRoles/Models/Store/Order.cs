@@ -13,7 +13,6 @@ namespace MyBookingRoles.Models.Store
         [Key]
         public int OrderId { get; set; }
         public string OrderName { get; set; }
-        //[DisplayFormat(DataFormatString ="{0: yyy-mm-dd}", ApplyFormatInEditMode = true)]
         public DateTime OrderDate { get; set; }
         public string PaymentType { get; set; }
         public double PaymentAmount { get; set; }
@@ -40,6 +39,8 @@ namespace MyBookingRoles.Models.Store
             var subject = "Studio Foto45 Purchase Order Details";
             var body = "Dear " + CustomerName + ", <br /><br />Order : <b style='color: green'>" + OrderName +" Was Successfull!</b><br />Delivery to -<b>"+ CustomerAddress + "</b>-</b><br /> Please Login to <b>Studio Foto45!</b> for your Orders.<hr /><b style='color: red'>Please Do not reply</b>.<br /> Thanks & Regards, <br /><b>Studio Foto45!</b>";
 
+            //Copy from here
+            //Change @Body content
             string fromEmail = System.Configuration.ConfigurationManager.AppSettings["fromEmail"].ToString();
             string fromPassword = System.Configuration.ConfigurationManager.AppSettings["fromPassword"].ToString();
 

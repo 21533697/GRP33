@@ -3,6 +3,7 @@ using MyBookingRoles.Models;
 using MyBookingRoles.Models.Store;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -32,13 +33,22 @@ namespace MyBookingRoles.Controllers
         }
 
         //Customer List
-        public ActionResult customerOrders()
+        public ActionResult customerOrders(string searchWord)
         {
-            
             var id = User.Identity.GetUserName().ToString();
-            var mm = context.Orders.Where(v => v.CustomerEmail == id).ToList();
+            var mm = context.Orders.Where(v => v.CustomerEmail == id && (v.Status.Contains(searchWord) || searchWord == null)).ToList();
             ViewBag.User = id;
             return View(mm);
+        }
+
+        public ActionResult DeleteOrder(int id)
+        {
+            Order ord = context.Orders.Find(id);
+            ord.Status = "Cancelled";
+            context.Entry(ord).State = EntityState.Modified;
+            context.SaveChangesAsync();
+
+            return RedirectToAction("Index", new { id = ord.OrderId });
         }
 
         public ActionResult RatingSerciveIndex()

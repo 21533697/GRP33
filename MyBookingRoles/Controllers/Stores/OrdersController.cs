@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace MyBookingRoles.Controllers.Stores
 {
@@ -22,27 +23,24 @@ namespace MyBookingRoles.Controllers.Stores
         }
 
         [Authorize(Roles = "SuperAdmin")]
-        [HttpPost]
-        public ActionResult ApproveOrder(int? id)
+        public ActionResult ApproveOrder(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
-            }
-            //var orderD = db.OrderDetails.Where(o => o.OrderId == id);
-            var ord = db.Orders.Find(id);
+            Order ord = db.Orders.Find(id);
+            ord.Status = "Approved";
+            db.Entry(ord).State = EntityState.Modified;
+            db.SaveChangesAsync();
 
-            if (ord == null)
-            {
-                return HttpNotFound();
-            }
-            return View("Index");
+            return RedirectToAction("Index", new { id = ord.OrderId });
         }
 
+        [Authorize(Roles = "SuperAdmin")]
         public ActionResult DeleteOrder(int id)
         {
-            //write logic for deleting an order with its order details
-            return View("Index");
+            Order ord = db.Orders.Find(id);
+            db.Orders.Remove(ord);
+            db.SaveChangesAsync();
+
+            return RedirectToAction("Index");
         }
 
         // GET: Orders/Details/5

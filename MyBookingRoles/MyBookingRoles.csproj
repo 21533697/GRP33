@@ -196,6 +196,7 @@
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\Stores\BrandsController.cs" />
     <Compile Include="Controllers\Stores\CategoriesController.cs" />
+    <Compile Include="Controllers\Stores\InventoryController.cs" />
     <Compile Include="Controllers\Stores\OrdersController.cs" />
     <Compile Include="Controllers\Stores\ProductsController.cs" />
     <Compile Include="Controllers\Stores\ShoppingCartController.cs" />
@@ -262,6 +263,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Content Include="assets\images\background\error-bg.jpg" />
     <Content Include="assets\images\big\img1.jpg" />
     <Content Include="assets\images\big\img2.jpg" />
@@ -366,6 +368,12 @@
     <Content Include="assets\plugins\sticky-kit-master\dist\sticky-kit.js" />
     <Content Include="assets\plugins\sticky-kit-master\dist\sticky-kit.min.js" />
     <Content Include="assets\plugins\styleswitcher\jQuery.style.switcher.js" />
+=======
+    <Content Include="App_Data\MyBookingRolesStoreAfter.mdf" />
+    <Content Include="App_Data\MyBookingRolesStoreAfter_log.ldf">
+      <DependentUpon>MyBookingRolesStoreAfter.mdf</DependentUpon>
+    </Content>
+>>>>>>> cd0a5c4a35709a1601bdb0d32b24463ecf2defdc
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -780,6 +788,7 @@
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+<<<<<<< HEAD
     <Content Include="assets\plugins\bootstrap\css\bootstrap-grid.css.map" />
     <Content Include="assets\plugins\bootstrap\css\bootstrap-grid.min.css.map" />
     <Content Include="assets\plugins\bootstrap\css\bootstrap-reboot.css.map" />
@@ -1106,6 +1115,10 @@
     <Content Include="MDB-Free_4.19.1\scss\mdb-lite-free.scss" />
     <Content Include="MDB-Free_4.19.1\scss\_custom-styles.scss" />
     <Content Include="MDB-Free_4.19.1\scss\_custom-variables.scss" />
+=======
+    <Content Include="Documents\Submission Docs\2020 ADPB301 Study Guide V2.pdf" />
+    <Content Include="Documents\Submission Docs\Application form.docx" />
+>>>>>>> cd0a5c4a35709a1601bdb0d32b24463ecf2defdc
     <None Include="Properties\PublishProfiles\StudioFoto45-StoreV2 - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\StudioFoto45-StoreV2 - ReadOnly - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\StudioFoto45-StoreV2 - Web Deploy.pubxml" />
@@ -1342,8 +1355,13 @@
     <Content Include="Views\Store\CategoryCatalogue.cshtml" />
     <Content Include="Views\Store\ProductDetails.cshtml" />
     <Content Include="Views\SuperAdmin\DeliverySystemIndex.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\PayPal\ViewofValidate.cshtml" />
     <Content Include="Views\Shared\_CustomerLayout.cshtml" />
+=======
+    <Content Include="Views\DeliverySystem\DeliveryDashboard.cshtml" />
+    <Content Include="Views\SuperAdmin\InventoryIndex.cshtml" />
+>>>>>>> cd0a5c4a35709a1601bdb0d32b24463ecf2defdc
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -1359,9 +1377,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="images\Site_Imaes\" />
-    <Folder Include="Views\DeliverySystem\" />
+    <Folder Include="Views\Inventory\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202009022021118_BrandVisibility.resx">

@@ -41,7 +41,7 @@
     var base64 = "";
     var imgsrc = "";
 
-    <tr>
+    <tr style="text-align:center">
         <td>
             @Html.DisplayFor(modelItem => item.Brand.Name)
         </td>
@@ -57,7 +57,7 @@
                 base64 = Convert.ToBase64String(item.ProductPics);
                 imgsrc = string.Format("data:image/gif;base64,{0}", base64);
 
-                <img src='@imgsrc' style="width:100px;height:100px" class="img-responsive"/>
+                <img src='@imgsrc' style="width:50px;height:50px" class="img-responsive"/>
             }
         </td>
         <td>
@@ -70,7 +70,7 @@
             @Html.DisplayFor(modelItem => item.IsVisible)
         </td>
         <td style="text-align:center;">
-            @Html.ActionLink("Edit", "Edit", new { id=item.ProductID }, new { @class = "btn btn-success" }) |
+            @*@Html.ActionLink("Edit", "Edit", new { id=item.ProductID }, new { @class = "btn btn-success" }) |*@
             @Html.ActionLink("Details", "Details", new { id=item.ProductID }, new { @class = "btn btn-primary" }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.ProductID }, new { @class = "btn btn-danger" })
         </td>
