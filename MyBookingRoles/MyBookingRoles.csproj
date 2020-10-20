@@ -263,7 +263,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-<<<< HEAD
+<<<<<< HEAD
     <Content Include="assets\images\background\error-bg.jpg" />
     <Content Include="assets\images\big\img1.jpg" />
     <Content Include="assets\images\big\img2.jpg" />
