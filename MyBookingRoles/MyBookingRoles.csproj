@@ -263,7 +263,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-<<<<<< HEAD
+ HEAD
     <Content Include="assets\images\background\error-bg.jpg" />
     <Content Include="assets\images\big\img1.jpg" />
     <Content Include="assets\images\big\img2.jpg" />
@@ -788,7 +788,7 @@
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-<<<<<<< HEAD
+HEAD
     <Content Include="assets\plugins\bootstrap\css\bootstrap-grid.css.map" />
     <Content Include="assets\plugins\bootstrap\css\bootstrap-grid.min.css.map" />
     <Content Include="assets\plugins\bootstrap\css\bootstrap-reboot.css.map" />
@@ -1355,7 +1355,7 @@
     <Content Include="Views\Store\CategoryCatalogue.cshtml" />
     <Content Include="Views\Store\ProductDetails.cshtml" />
     <Content Include="Views\SuperAdmin\DeliverySystemIndex.cshtml" />
-<<<<<<< HEAD
+ HEAD
     <Content Include="Views\PayPal\ViewofValidate.cshtml" />
     <Content Include="Views\Shared\_CustomerLayout.cshtml" />
 =======
