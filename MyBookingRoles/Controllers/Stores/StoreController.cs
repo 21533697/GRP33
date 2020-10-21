@@ -8,6 +8,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.IO ;
+
 
 namespace Studio45.Controllers.Store
 {
@@ -18,9 +20,11 @@ namespace Studio45.Controllers.Store
 
         // GET: StoreHome
 
-        public ActionResult ProdCatalogue(string searchWord)
+        public ActionResult ProdCatalogue(int? page,  string searchWord)
         {
-            return View(db.Products.Where(p => p.ProductName.Contains(searchWord) || searchWord == null && p.IsVisible == true).ToList());
+            int pageSize = 8;
+            int pageNumber = (page ?? 1);
+            return View(db.Products.Where(p => p.ProductName.Contains(searchWord) || searchWord == null && p.IsVisible == true).ToPagedList(pageNumber,pageSize));
         }
 
         // GET: ProductDetails
@@ -38,16 +42,38 @@ namespace Studio45.Controllers.Store
             return View(product);
         }
 
-        // GET: BrandCatalogue
-        public ActionResult BrandCatalogue(string searchWord)
+<<<<<<< HEAD
+        //
+        //GET:/StoreHome/Browse
+        public ActionResult Search()
         {
-            return View(db.Brands.Where(p => p.Name.Contains(searchWord) || searchWord == null).ToList());
+            //Search Code....
+            //
+
+            return View("ProdCatalogue");
         }
 
+        public ActionResult BrandCatalogue(int? page, string searchWord)
+=======
+        // GET: BrandCatalogue
+        public ActionResult BrandCatalogue(string searchWord)
+>>>>>>> cd0a5c4a35709a1601bdb0d32b24463ecf2defdc
+        {
+            int pageSize=8;
+            int pageNumber = (page ?? 1);
+            return View(db.Brands.Where(p => p.Name.Contains(searchWord) || searchWord == null).ToPagedList(pageNumber,pageSize));
+        }
+
+<<<<<<< HEAD
+        public ActionResult CategoryCatalogue(string searchWordC, int? page)
+=======
         // GET: CategoryCatalogue
         public ActionResult CategoryCatalogue(string searchWordC)
+>>>>>>> cd0a5c4a35709a1601bdb0d32b24463ecf2defdc
         {
-            return View(db.Category.Where(p => p.CategoryName.Contains(searchWordC) || searchWordC == null).ToList());
+            int pageSize = 8;
+            int pageNumber = (page ?? 1);
+            return View(db.Category.Where(p => p.CategoryName.Contains(searchWordC) || searchWordC == null).ToPagedList(pageSize,pageNumber));
         }
     }
 }
